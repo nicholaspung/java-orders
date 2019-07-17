@@ -17,20 +17,20 @@ public class Orders {
     private double ordamount;
     private double advanceamount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "custcode", nullable = false)
-    @JsonIgnoreProperties({"orders", "hibernateLazyInitializer"})
-    private Customers customer;
+    @JsonIgnoreProperties("orders")
+    private Customers customers;
 
     private String orddescription;
 
     public Orders() {
     }
 
-    public Orders(double ordamount, double advanceamount, Customers customer, String orddescription) {
+    public Orders(double ordamount, double advanceamount, Customers customers, String orddescription) {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
-        this.customer = customer;
+        this.customers = customers;
         this.orddescription = orddescription;
     }
 
@@ -55,11 +55,11 @@ public class Orders {
     }
 
     public Customers getCustomer() {
-        return customer;
+        return customers;
     }
 
-    public void setCustomer(Customers customer) {
-        this.customer = customer;
+    public void setCustomer(Customers customers) {
+        this.customers = customers;
     }
 
     public String getOrddescription() {

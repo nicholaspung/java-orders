@@ -29,19 +29,19 @@ public class Customers {
     private double outstandingamt;
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
-    @JsonIgnoreProperties({"customers", "hibernateLazyInitializer"})
-    private Agents agent;
+    @JsonIgnoreProperties("customers")
+    private Agents agents;
 
     @OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("customers")
+    @JsonIgnoreProperties("customer")
     private List<Orders> orders = new ArrayList<>();
 
     public Customers() {
     }
 
-    public Customers(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agents agent) {
+    public Customers(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agents agents) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -52,7 +52,7 @@ public class Customers {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
-        this.agent = agent;
+        this.agents = agents;
     }
 
     public long getCustcode() {
@@ -140,11 +140,11 @@ public class Customers {
     }
 
     public Agents getAgent() {
-        return agent;
+        return agents;
     }
 
-    public void setAgent(Agents agent) {
-        this.agent = agent;
+    public void setAgent(Agents agents) {
+        this.agents = agents;
     }
 
     public List<Orders> getOrders() {
